@@ -8,8 +8,13 @@ public class Cuenta {
     Double saldo;
     List <Movimiento> mMovimientos;
     
+    public Cuenta(String mNumero, Double saldo) {
+    	this.mNumero = mNumero;
+    	this.saldo = saldo;
+    }
 	public void ingresar(double d) {
-		saldo += saldo += d;
+		if (d < 0) throw new IllegalArgumentException();
+		saldo += d;
 	}
 
 	public Double getSaldo() {
@@ -21,6 +26,8 @@ public class Cuenta {
 	}
 
 	public void retirar(double d) {
+		if (d < 0) throw new IllegalArgumentException();
+		if (saldo - d < -500) throw new IllegalStateException();
 		saldo -=  d;
 	}
 }
